@@ -1,6 +1,6 @@
 #!/bin/bash
 
-JP_CACHE_FILE="$HOME/jmp_cache"
+JP_CACHE_FILE="$HOME/.jmp_cache"
 
 # キャッシュ更新
 function update_cache() {
