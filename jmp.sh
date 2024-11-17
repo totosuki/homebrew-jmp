@@ -1,5 +1,32 @@
 #!/bin/bash
 
+# エイリアス確認
+function check_alias() {
+    local alias_required='alias jmp="source jmp"'
+    local shell_config_files=("$HOME/.zshrc" "$HOME/.bashrc")
+
+    for config_file in "${shell_config_files[@]}"; do
+        if [ -f "$config_file" ] && grep -Fxq "$alias_required" "$config_file"; then
+            # 必要なエイリアスが見つかった場合は終了
+            return 0
+        fi
+    done
+
+    # 必要なエイリアスが見つからなかった場合に注意書きを出力
+    echo -e "\033[33mWarning: The required alias is not set in your shell configuration.\033[0m"
+    echo "Please add the following line to your ~/.zshrc or ~/.bashrc:"
+    echo ""
+    echo '  alias jmp="source jmp"'
+    echo ""
+    echo "Then reload your shell:"
+    echo "  source ~/.zshrc   # or source ~/.bashrc"
+    echo ""
+    return 1
+}
+
+# エイリアス確認
+check_alias || exit 1
+
 JP_CACHE_FILE="$HOME/.jmp_cache"
 
 # キャッシュ更新
