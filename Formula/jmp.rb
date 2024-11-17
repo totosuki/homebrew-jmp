@@ -1,8 +1,8 @@
 class Jmp < Formula
   desc "A command-line tool to jump(jmp) between directories"
-  homepage "https://github.com/totosuki/jmp"
-  url "https://github.com/totosuki/jmp/archive/refs/tags/v1.0.tar.gz"
-  sha256 "e65e49bfd71efb8b3c609fbca1f46c2f2c8b177e08b4e4590d260c7e252edfc9"
+  homepage "https://github.com/totosuki/homebrew-jmp"
+  url "https://github.com/totosuki/homebrew-jmp/archive/refs/tags/v1.0.tar.gz"
+  sha256 "17a41d7c5e5e5c9e04daf0132ef255fc1e1d0821b05f4c8e69de17571fa38a28"
   license "MIT"
 
   def install
