@@ -5,6 +5,8 @@ class Jmp < Formula
   sha256 "17a41d7c5e5e5c9e04daf0132ef255fc1e1d0821b05f4c8e69de17571fa38a28"
   license "MIT"
 
+  depends_on "fzf"
+
   def install
     bin.install "jmp.sh" => "jmp"
   end
