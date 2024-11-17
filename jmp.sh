@@ -27,25 +27,25 @@ function check_alias() {
 # エイリアス確認
 check_alias || exit 1
 
-JP_CACHE_FILE="$HOME/.jmp_cache"
+JMP_CACHE_FILE="$HOME/.jmp_cache"
 
 # キャッシュ更新
 function update_cache() {
     # fd が使える場合
     if command -v fd > /dev/null; then
         echo 'Updating cache with "fd" command...'
-        fd --type d . ~ > "$JP_CACHE_FILE"
+        fd --type d . ~ > "$JMP_CACHE_FILE"
     # fd が使えない場合
     else
         echo 'Updating cache with "find" command...'
-        find ~ -type d 2> /dev/null > "$JP_CACHE_FILE"
+        find ~ -type d 2> /dev/null > "$JMP_CACHE_FILE"
     fi
-    echo "Cache updated: $JP_CACHE_FILE"
+    echo "Cache updated: $JMP_CACHE_FILE"
 }
 
 function search() {
     # キャッシュが無い場合
-    if ! test -f "$JP_CACHE_FILE"; then
+    if ! test -f "$JMP_CACHE_FILE"; then
         echo -e "\033[33mCache does not exist. Do you want to create it now? (y/n)\033[0m"
 
         # y/n 入力
@@ -67,11 +67,11 @@ function search() {
     fi
 
     if command -v tmux >/dev/null && tmux info &>/dev/null; then
-        target=$(cat "$JP_CACHE_FILE" | fzf-tmux -p 2>/dev/null)
+        target=$(cat "$JMP_CACHE_FILE" | fzf-tmux -p 2>/dev/null)
     fi
 
     if [ -z "$target" ]; then
-        target=$(cat "$JP_CACHE_FILE" | fzf)
+        target=$(cat "$JMP_CACHE_FILE" | fzf)
     fi
     
     if test -n "$target"; then
@@ -83,14 +83,14 @@ function search() {
 }
 
 function show_help() {
-    echo "Usage: jp [OPTIONS]"
+    echo "Usage: jmp [OPTIONS]"
     echo ""
     echo "Options:"
     echo "  -u, --update   Update the cache file."
     echo "  -h, --help     Show this help message."
     echo ""
     echo "Description:"
-    echo "  jp is a utility to quickly navigate to frequently used directories."
+    echo "  jmp is a utility to quickly navigate to frequently used directories."
     echo "  Use 'fzf' to interactively select a directory from a cached list."
     echo ""
     echo "For detailed instructions and additional notes, see the README:"
