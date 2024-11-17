@@ -11,6 +11,20 @@ class Jmp < Formula
     bin.install "jmp.sh" => "jmp"
   end
 
+  def caveats
+    <<~EOS
+      To use the `jmp` command, you need to add the following alias to your shell configuration:
+
+        alias jmp="source jmp"
+
+      Then reload your shell:
+
+        source ~/.zshrc   # or source ~/.bashrc
+
+      Note: `fzf` is required for `jmp` to function. It has been installed as a dependency.
+    EOS
+  end
+
   test do
     assert_match "Usage", shell_output("#{bin}/jmp --help", 1)
   end
